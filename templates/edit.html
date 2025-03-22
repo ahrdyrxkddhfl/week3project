@@ -1,0 +1,30 @@
+<!-- templates/edit.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>글 수정</title>
+
+    <!--css연결. static/폴더의 style.css 파일 적용-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!--페이지 상단 제목-->
+    <h1>글 수정</h1>
+    <!--게시글 수정. POST방식임. 데이터 전송. -->
+    <form action="{{ url_for('edit', id=post.id) }}" method="post">
+      <!--제목 입력. 기존 제목은 value 이용해서 채워준다. 그래서 수정 전 내용 보임-->
+      <input type="text" name="title" value="{{ post.title }}" required /><br />
+      <!--내용 입력. 수정 전 원래 글 내용을 textarea 안에 불러온다. 그 다음 수정-->
+      <textarea name="content" required>{{ post.content }}</textarea><br />
+
+      <button type="submit">수정 완료</button>
+    </form>
+
+    <!--게시글 목록으로 돌아가는 링크, 누르면 이동-->
+    <a href="{{ url_for('index') }}">← 목록으로</a>
+  </body>
+</html>

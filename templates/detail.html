@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<!--문서 한국어 및 깨짐 방지 인코딩UTF-8 설정-->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ post.title }}</title>
+    <!--브라우저 탭 제목은 게시글 제목으로-->
+
+    <!--css파일 연결함. static/  에서 불러오기-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!--게시판 제목. 클릭하면 처음 리스트 뜨는 메인 페이지로 이동하기-->
+    <h1>
+      <a
+        href="{{ url_for('index') }}"
+        style="text-decoration: none; color: inherit"
+      >
+        💝게시판💝
+      </a>
+    </h1>
+
+    <!--게시글 상세 내용. 순서대로 제목, 작성 시간, 게시글 본문-->
+    <div class="post-detail">
+      <h2>{{ post.title }}</h2>
+      <p class="date">{{ post.created_at }}</p>
+      <p class="content">{{ post.content }}</p>
+    </div>
+
+    <!-- 게시판 제목 눌렀을 때와 동일 효과-->
+    <p><a href="{{ url_for('index') }}">목록으로</a></p>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!-- templates/create.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>글쓰기</title>
+    <!--브라우저 탭 제목-->
+
+    <!--css연결. static/에서 style.css 가져옴-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!--페이지 상단-->
+    <h1>글쓰기</h1>
+    <!--게시글 작성하는 부분.-->
+    <form action="{{ url_for('create') }}" method="post">
+      <!--제목-->
+      <input type="text" name="title" placeholder="제목" required /><br />
+      <!--내용 입력-->
+      <textarea name="content" placeholder="내용" required></textarea><br />
+      <!--제출 버튼-->
+      <button type="submit">작성 완료</button>
+    </form>
+
+    <!--누르면 게시판 목록 리스트, 홈 페이지로 돌아가기-->
+    <a href="{{ url_for('index') }}">← 목록으로</a>
+  </body>
+</html>

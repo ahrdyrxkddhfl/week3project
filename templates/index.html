@@ -1,0 +1,73 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>게시판</title>
+
+    <!-- 외부 css 파일을 연결. static/에서 가져옴-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <!--게시판 나타내기. 클릭할 시 메인 페이지로 이동하게 만든다!-->
+  <body>
+    <h1>
+      <!--index로 이동하도록-->
+      <a
+        href="{{ url_for('index') }}"
+        style="text-decoration: none; color: inherit"
+      >
+        💝게시판💝
+      </a>
+    </h1>
+
+    <!--작성된 게시글 출력-->
+    <ul class="post-list">
+      {% for post in posts %}
+      <!--app.py에서 작성된 posts받아 옴-->
+      <li>
+        <!--게시글 제목 클릭하면 detail.html 띄우기-->
+        <a href="{{ url_for('detail', id=post.id) }}">
+          <strong>{{ post.title }}</strong> </a
+        ><br />
+
+        <!--작성 시간 출력-->
+        <small>{{ post.created_at }}</small><br />
+
+        <!--수정은 edit.html으로. 삭제는 삭제-->
+        <a href="{{ url_for('edit', id=post.id) }}">수정</a>
+        <a href="{{ url_for('delete', id=post.id) }}">삭제</a>
+      </li>
+      {% else %}
+      <!--게시글 없을 때 출력되는 문구-->
+      <p>게시글이 없습니다.</p>
+      {% endfor %}
+    </ul>
+
+    <!--GET  방식으로 /search에 요청함. 사용자가 입력하는 것을 검색하도록-->
+    <form
+      action="{{ url_for('search') }}"
+      method="GET"
+      class="search-container"
+    >
+      <!--검색어 입력-->
+      <input type="text" name="q" placeholder="검색어 입력" />
+
+      <!--검색 옵션 선택. 전체, 제목, 내용 3가지-->
+      <select name="field">
+        <option value="all">전체</option>
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+      </select>
+
+      <!-- 검색 버튼-->
+      <button type="submit">검색🔎</button>
+    </form>
+
+    <!--글쓰기 버튼-->
+    <a href="{{ url_for('create') }}" class="btn">✒️글쓰기</a>
+  </body>
+</html>
