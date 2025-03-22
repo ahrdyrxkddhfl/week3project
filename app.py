@@ -6,12 +6,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from dotenv import load_dotenv
 load_dotenv()
 
-#mysql 계정 연결 테스트 확인용/나중에 삭제하기
-import os
-os.environ["DB_USER"] = "roseblue"
-print("💡 DB_USER:", os.getenv("DB_USER"))
-print("💡 DB_PASSWORD:", os.getenv("DB_PASSWORD"))
-
 #db 연결 함수 import. db.py에 따로 정의되어 있어야 함 주의.
 from db import get_conn
 
